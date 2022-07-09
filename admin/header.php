@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog | Starter</title>
+    <title>Blog Site</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link
@@ -35,10 +35,17 @@
             >
               <i class="fas fa-search"></i>
             </a>
+            <?php
+                $link = $_SERVER['PHP_SELF'];
+                $link_array = explode('/', $link);
+                $page = end($link_array);
+              ?>
             <div class="navbar-search-block">
-              <form class="form-inline">
+              <form class="form-inline" method="post" action="<?php echo $page == 'index.php' ? 'index.php': 'user_list.php'; ?>">
+              <input type="hidden" name="_token" value="<?php echo $_SESSION['_token']; ?>">
                 <div class="input-group input-group-sm">
                   <input
+                    name ="search"
                     class="form-control form-control-navbar"
                     type="search"
                     placeholder="Search"
@@ -123,6 +130,12 @@
                 <a href="index.php" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>Blogs</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="user_list.php" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Users</p>
                 </a>
               </li>
             </ul>
